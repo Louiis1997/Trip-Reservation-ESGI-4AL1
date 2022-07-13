@@ -1,13 +1,13 @@
-package com.esgi.travelagency;
+package com.esgi;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TravelAgencyApplication {
+public class SpringMain {
 
     public static void main(String[] args) {
-        SpringApplication.run(TravelAgencyApplication.class, args);
+        SpringApplication.run(SpringMain.class, args);
     }
-
 }
