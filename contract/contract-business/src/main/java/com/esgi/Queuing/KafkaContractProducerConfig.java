@@ -1,5 +1,6 @@
-package com.esgi;
+package com.esgi.Queuing;
 
+import com.esgi.ContractConstants;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
@@ -14,12 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaProducerConfig {
+public class KafkaContractProducerConfig {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaContractProducerConfig.class);
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String bootstrapServers;
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducerConfig.class);
-
     private KafkaTemplate<String, String> kafkaTemplate;
 
     public Map<String, Object> producerConfig() {
@@ -35,11 +35,11 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
-    public void sendMessage(String message){
+    public void sendMessage(String message) {
         if (kafkaTemplate == null) {
             kafkaTemplate = new KafkaTemplate<>(producerFactory());
         }
         LOGGER.info(String.format("Message sent -> %s", message));
-        kafkaTemplate.send(AppConstants.TOPIC_NAME, message);
+        kafkaTemplate.send(ContractConstants.BILLING_TOPIC_NAME, message);
     }
 }
