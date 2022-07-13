@@ -1,4 +1,4 @@
-package com.esgi.Queuing;
+package com.esgi.queuing;
 
 import com.esgi.ContractConstants;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -35,11 +35,15 @@ public class KafkaContractProducerConfig {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
 
-    public void sendMessage(String message) {
+    public KafkaTemplate<String, String> kafkaTemplate() {
         if (kafkaTemplate == null) {
             kafkaTemplate = new KafkaTemplate<>(producerFactory());
         }
-        LOGGER.info(String.format("Message sent -> %s", message));
-        kafkaTemplate.send(ContractConstants.BILLING_TOPIC_NAME, message);
+        return kafkaTemplate;
+    }
+
+    public void sendSubscribeContractMessage(String message) {
+        LOGGER.info(String.format("Message sent (Topic : %s) -> %s", ContractConstants.BILLING_SUBSCRIBE_CONTRACT_TOPIC_NAME, message));
+        this.kafkaTemplate().send(ContractConstants.BILLING_SUBSCRIBE_CONTRACT_TOPIC_NAME, message);
     }
 }

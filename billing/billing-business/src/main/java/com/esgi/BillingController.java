@@ -1,6 +1,6 @@
 package com.esgi;
 
-import com.esgi.Queuing.KafkaBillingProducerConfig;
+import com.esgi.queuing.KafkaBillingProducerConfig;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

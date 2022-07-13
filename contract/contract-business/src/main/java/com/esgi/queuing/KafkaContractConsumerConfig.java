@@ -1,4 +1,4 @@
-package com.esgi.Queuing;
+package com.esgi.queuing;
 
 import com.esgi.ContractConstants;
 import org.slf4j.Logger;
@@ -14,6 +14,6 @@ public class KafkaContractConsumerConfig {
     @KafkaListener(topics = ContractConstants.CONTRACT_TOPIC_NAME,
             groupId = ContractConstants.GROUP_ID)
     public void consume(String message) {
-        LOGGER.info(String.format("Message received -> %s", message));
+        LOGGER.info(String.format("Message received (Topic : %s) -> %s", ContractConstants.CONTRACT_TOPIC_NAME, message));
     }
 }

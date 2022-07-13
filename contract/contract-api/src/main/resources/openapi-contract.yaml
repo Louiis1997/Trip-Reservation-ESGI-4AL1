@@ -234,7 +234,7 @@ paths:
               examples:
                 ContractsResponse:
                   $ref: '#/components/examples/ErrorResponse'
- 
+
 components:
   securitySchemes:
     ApiKey:
@@ -370,6 +370,7 @@ components:
           type: string
         line5:
           description: LIEU DIT ou SERVICE PARTICULIER DE DISTRIBUTION
+          type: string
         locality:
           description: Name of the locality of the address
           type: string
@@ -392,8 +393,9 @@ components:
         - lastName
         - mail
       properties:
-        ccui:
-          description: CCUI
+        ccuid:
+          description: CCUID
+          type: string
           example: CCU-123
         gender:
           description: Gender of the contact
@@ -430,7 +432,7 @@ components:
           description: Référence Unique de Mandat
           type: string
           example: RUM08918098739762ABCGDF65524255658
-          
+
     DeferredBilling:
       description: Describe billing contract
       type: object
@@ -439,7 +441,7 @@ components:
           type: integer
           example: 3000
         payment:
-          $ref: '#/components/schemas/BusinessPayment'          
+          $ref: '#/components/schemas/BusinessPayment'
 
     BusinessDistributor:
       description: Describes distributor organisation & contact
@@ -497,18 +499,18 @@ components:
               description: External identifier of organisation (i.e. firstName + lastName)
               type: string
               example: John DOE
-              
+
     ContractActionRequest:
       description: Describe contract action
       type: object
       properties:
-        action: 
+        action:
           type: string
           example: activation
         contractRef:
           type: string
-    
-              
+
+
     BusinessSubscriber:
       description: Describes subscriber organisation & contact
       type: object
@@ -531,10 +533,7 @@ components:
             - PROFESSIONNAL
           example: PROFESSIONNAL
         party:
-          type: object
-          oneOf:
-            - $ref: '#/components/schemas/BusinessProfessionnalParty'
-            - $ref: '#/components/schemas/BusinessParticularParty'
+          $ref: '#/components/schemas/BusinessProfessionnalParty'
         eInvoicing:
           description: Necessary for e-Invoicing & e-Reporting
           type: object
@@ -597,13 +596,13 @@ components:
           type: string
           enum:
             - DEFERRED_BILLING
-          example: DEFERRED_BILLING        
+          example: DEFERRED_BILLING
         contractType:
           description: Type of contract
           type: string
           enum:
             - DEFERRED_BILLING
-          example: DEFERRED_BILLING          
+          example: DEFERRED_BILLING
         createdAt:
           description: Creation date of contract (use ISO 8601 format YYYY-MM-DD)
           type: string
@@ -613,7 +612,7 @@ components:
           description: Signed date of contract (use ISO 8601 format YYYY-MM-DD)
           type: string
           format: date
-          example: '2022-04-22'          
+          example: '2022-04-22'
         activatedAt:
           description: Activation date of contract (use ISO 8601 format YYYY-MM-DD)
           type: string
@@ -638,10 +637,8 @@ components:
         subscriber:
           $ref: '#/components/schemas/BusinessSubscriber'
         custom:
-          type: object
-          oneOf:
-            - $ref: '#/components/schemas/DeferredBilling'
-          
+          $ref: '#/components/schemas/DeferredBilling'
+
       example:
         ContractResponse:
           $ref: '#/components/examples/ContractResponse'
@@ -726,7 +723,7 @@ components:
         distributor:
           distributorRef: esgi SA
         subscriber:
-          subscriberRef: MA PETITE ENTREPRISE 
+          subscriberRef: MA PETITE ENTREPRISE
           subscriberType: PROFESSIONNAL
           party:
             customerId: PRO-8996786873
@@ -741,9 +738,9 @@ components:
           deferredBilling:
             creditLimit: 3000
             payment:
-                paymentMethodType: WIRETRANSFER
-                wireTansfert:
-                  rum : RUM08918098739762ABCGDF65524255658
+              paymentMethodType: WIRETRANSFER
+              wireTansfert:
+                rum : RUM08918098739762ABCGDF65524255658
     ContractResponse:
       value:
         contractId: '786876725453'
@@ -772,7 +769,7 @@ components:
             phone: +33 (0)7 76 77 00 00
         custom:
           deferredBilling:
-            creditLimit: 3000   
+            creditLimit: 3000
             payment:
               paymentMethodType: WIRETRANSFER
               wireTansfert:
@@ -802,12 +799,12 @@ components:
                 phone: +33 (0)7 76 77 00 00
             custom:
               deferredBilling:
-                creditLimit: 3000            
+                creditLimit: 3000
                 payment:
                   paymentMethodType: WIRETRANSFER
                   wireTansfert:
                     rum : RUM08918098739762ABCGDF65524255658
-                  
+
         metadata:
           query: /contracts?customerRef=CUSTOMER&status=ACTIVE
           countItems: 1
