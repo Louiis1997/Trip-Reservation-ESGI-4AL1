@@ -57,6 +57,11 @@ public class InMemorySubscriberRepository implements SubscriberRepository {
     }
 
     @Override
+    public List<Subscriber> getAllActive() {
+        return new ArrayList<>(data.values()); // Apply filter
+    }
+
+    @Override
     public String nextId() {
         return String.valueOf(counter.incrementAndGet());
     }

@@ -16,14 +16,14 @@ import java.util.Objects;
 
 public class CreateContractCommandHandler implements CommandHandler<CreateContract, Contract> {
 
+    private final KafkaTemplate<String, String> kafkaTemplate;
     private final ContractRepository contractRepository;
     private final SubscriberRepository subscriberRepository;
-    private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public CreateContractCommandHandler(ContractRepository contractRepository, SubscriberRepository subscriberRepository, KafkaTemplate<String, String> kafkaTemplate) {
+    public CreateContractCommandHandler(KafkaTemplate<String, String> kafkaTemplate, ContractRepository contractRepository, SubscriberRepository subscriberRepository) {
+        this.kafkaTemplate = kafkaTemplate;
         this.contractRepository = contractRepository;
         this.subscriberRepository = subscriberRepository;
-        this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CreateContractCommandHandler implements CommandHandler<CreateContra
                     subscriber.getEmail()
             );
 
-            kafkaTemplate.send(BillingConstants.MAILING_CREATED_CONTRACT_TOPIC, createdContractEvent.toJSON());
+            kafkaTemplate.send(BillingConstants.MAILING_CREATED_CONTRACT_TOPIC_NAME, createdContractEvent.toJSON());
             kafkaTemplate.send(BillingConstants.MAILING_SUBSCRIBED_CONTRACT_TOPIC_NAME, subscribedContractEvent.toJSON());
 
             return contract;

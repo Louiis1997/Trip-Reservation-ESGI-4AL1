@@ -19,6 +19,10 @@ public class Subscriber {
         return subscriberId;
     }
 
+    public Integer getContractId() {
+        return contractId;
+    }
+
     public String getEmail() {
         return email;
     }

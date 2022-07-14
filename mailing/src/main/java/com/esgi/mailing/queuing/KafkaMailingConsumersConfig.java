@@ -37,4 +37,16 @@ public class KafkaMailingConsumersConfig {
             e.printStackTrace();
         }
     }
+
+    @KafkaListener(topics = MailingConstants.MAILING_GENERATED_MONTHLY_BILL_TOPIC_NAME,
+            groupId = MailingConstants.GROUP_ID)
+    public void consumeGeneratedMonthlyBill(String message) {
+        try {
+            SubscribedContractEvent subscribedContractEvent = SubscribedContractEvent.fromJSON(message);
+            System.out.println("Send generated monthly bill mail to -> " + subscribedContractEvent.email);
+        } catch (JsonProcessingException e) {
+            LOGGER.error(String.format("Error while parsing message (Topic : %s) -> %s", MailingConstants.MAILING_GENERATED_MONTHLY_BILL_TOPIC_NAME, message));
+            e.printStackTrace();
+        }
+    }
 }

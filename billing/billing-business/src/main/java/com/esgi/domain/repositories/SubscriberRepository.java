@@ -19,6 +19,8 @@ public interface SubscriberRepository {
 
     void register(Subscriber project);
 
+    List<Subscriber> getAllActive();
+
     default String nextId() {
         return UUID.randomUUID().toString();
     }
