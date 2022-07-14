@@ -12,21 +12,34 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-public class SubscribeContractEvent {
+public class CreateContractEvent {
     @JsonProperty("productRef")
     public final ContractRequest.ProductRefEnum productRef;
     @JsonProperty("contractType")
     public final ContractRequest.ContractTypeEnum contractType;
     @JsonProperty("createdAt")
+    @DateTimeFormat(
+            iso = DateTimeFormat.ISO.DATE
+    )
     public final LocalDate createdAt;
     @JsonProperty("signedAt")
+    @DateTimeFormat(
+            iso = DateTimeFormat.ISO.DATE
+    )
     public final LocalDate signedAt;
     @JsonProperty("activatedAt")
+    @DateTimeFormat(
+            iso = DateTimeFormat.ISO.DATE
+    )
     public final LocalDate activatedAt;
     @JsonProperty("expiredAt")
+    @DateTimeFormat(
+            iso = DateTimeFormat.ISO.DATE
+    )
     public final LocalDate expireAt;
     @JsonProperty("status")
     public final ContractRequest.StatusEnum status;
@@ -38,7 +51,7 @@ public class SubscribeContractEvent {
     public final DeferredBilling custom;
 
     @JsonCreator()
-    public SubscribeContractEvent(ContractRequest.ProductRefEnum productRef, ContractRequest.ContractTypeEnum contractType, LocalDate createdAt, LocalDate signedAt, LocalDate activatedAt, LocalDate expireAt, ContractRequest.StatusEnum status, BusinessDistributor distributor, BusinessSubscriber subscriber, DeferredBilling custom) {
+    public CreateContractEvent(ContractRequest.ProductRefEnum productRef, ContractRequest.ContractTypeEnum contractType, LocalDate createdAt, LocalDate signedAt, LocalDate activatedAt, LocalDate expireAt, ContractRequest.StatusEnum status, BusinessDistributor distributor, BusinessSubscriber subscriber, DeferredBilling custom) {
         this.productRef = productRef;
         this.contractType = contractType;
         this.createdAt = createdAt;
@@ -57,5 +70,19 @@ public class SubscribeContractEvent {
         om.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         ObjectWriter ow = om.writer().withDefaultPrettyPrinter();
         return ow.writeValueAsString(this);
+    }
+
+    public ContractRequest toModel() {
+        return new ContractRequest()
+                .contractType(this.contractType)
+                .productRef(this.productRef)
+                .createdAt(this.createdAt)
+                .signedAt(this.signedAt)
+                .activatedAt(this.activatedAt)
+                .expireAt(this.expireAt)
+                .status(this.status)
+                .distributor(this.distributor)
+                .subscriber(this.subscriber)
+                .custom(this.custom);
     }
 }

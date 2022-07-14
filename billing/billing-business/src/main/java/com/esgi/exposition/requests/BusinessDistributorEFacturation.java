@@ -1,4 +1,4 @@
-package com.esgi.exposition;
+package com.esgi.exposition.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -11,10 +11,10 @@ import java.util.Objects;
  * Necessary for e-Invoicing &amp; e-Reporting
  */
 
-@Schema(name = "BusinessSubscriber_eInvoicing", description = "Necessary for e-Invoicing & e-Reporting")
-@JsonTypeName("BusinessSubscriber_eInvoicing")
+@Schema(name = "BusinessDistributor_eFacturation", description = "Necessary for e-Invoicing & e-Reporting")
+@JsonTypeName("BusinessDistributor_eFacturation")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-13T15:25:34.747681+02:00[Europe/Paris]")
-public class BusinessSubscriberEInvoicing {
+public class BusinessDistributorEFacturation {
 
     @JsonProperty("siren")
     private String siren;
@@ -25,7 +25,7 @@ public class BusinessSubscriberEInvoicing {
     @JsonProperty("country")
     private String country;
 
-    public BusinessSubscriberEInvoicing siren(String siren) {
+    public BusinessDistributorEFacturation siren(String siren) {
         this.siren = siren;
         return this;
     }
@@ -36,7 +36,7 @@ public class BusinessSubscriberEInvoicing {
      * @return siren
      */
 
-    @Schema(name = "siren", example = "784671695", required = false)
+    @Schema(name = "siren", example = "356000000", required = false)
     public String getSiren() {
         return siren;
     }
@@ -45,7 +45,7 @@ public class BusinessSubscriberEInvoicing {
         this.siren = siren;
     }
 
-    public BusinessSubscriberEInvoicing tvaIntracommunautaire(String tvaIntracommunautaire) {
+    public BusinessDistributorEFacturation tvaIntracommunautaire(String tvaIntracommunautaire) {
         this.tvaIntracommunautaire = tvaIntracommunautaire;
         return this;
     }
@@ -56,7 +56,7 @@ public class BusinessSubscriberEInvoicing {
      * @return tvaIntracommunautaire
      */
 
-    @Schema(name = "tvaIntracommunautaire", example = "FR53157896342", required = false)
+    @Schema(name = "tvaIntracommunautaire", example = "FR39356000000", required = false)
     public String getTvaIntracommunautaire() {
         return tvaIntracommunautaire;
     }
@@ -65,7 +65,7 @@ public class BusinessSubscriberEInvoicing {
         this.tvaIntracommunautaire = tvaIntracommunautaire;
     }
 
-    public BusinessSubscriberEInvoicing country(String country) {
+    public BusinessDistributorEFacturation country(String country) {
         this.country = country;
         return this;
     }
@@ -93,10 +93,10 @@ public class BusinessSubscriberEInvoicing {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        BusinessSubscriberEInvoicing businessSubscriberEInvoicing = (BusinessSubscriberEInvoicing) o;
-        return Objects.equals(this.siren, businessSubscriberEInvoicing.siren) &&
-                Objects.equals(this.tvaIntracommunautaire, businessSubscriberEInvoicing.tvaIntracommunautaire) &&
-                Objects.equals(this.country, businessSubscriberEInvoicing.country);
+        BusinessDistributorEFacturation businessDistributorEFacturation = (BusinessDistributorEFacturation) o;
+        return Objects.equals(this.siren, businessDistributorEFacturation.siren) &&
+                Objects.equals(this.tvaIntracommunautaire, businessDistributorEFacturation.tvaIntracommunautaire) &&
+                Objects.equals(this.country, businessDistributorEFacturation.country);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class BusinessSubscriberEInvoicing {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class BusinessSubscriberEInvoicing {\n");
+        sb.append("class BusinessDistributorEFacturation {\n");
         sb.append("    siren: ").append(toIndentedString(siren)).append("\n");
         sb.append("    tvaIntracommunautaire: ").append(toIndentedString(tvaIntracommunautaire)).append("\n");
         sb.append("    country: ").append(toIndentedString(country)).append("\n");

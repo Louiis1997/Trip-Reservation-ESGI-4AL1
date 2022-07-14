@@ -43,7 +43,7 @@ public class KafkaContractProducerConfig {
     }
 
     public void sendSubscribeContractMessage(String message) {
-        LOGGER.info(String.format("Message sent (Topic : %s) -> %s", ContractConstants.BILLING_SUBSCRIBE_CONTRACT_TOPIC_NAME, message));
-        this.kafkaTemplate().send(ContractConstants.BILLING_SUBSCRIBE_CONTRACT_TOPIC_NAME, message);
+        this.kafkaTemplate().send(ContractConstants.CREATED_CONTRACT_TOPIC_NAME, message);
+        LOGGER.info(String.format("Message sent (Topic : %s) -> %s", ContractConstants.CREATED_CONTRACT_TOPIC_NAME, message));
     }
 }

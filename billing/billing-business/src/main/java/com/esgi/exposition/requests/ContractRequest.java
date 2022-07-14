@@ -1,4 +1,4 @@
-package com.esgi.exposition;
+package com.esgi.exposition.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -49,7 +49,7 @@ public class ContractRequest {
      * @return productRef
      */
 
-    @Schema(name = "productRef", example = "DEFERRED_BILLING", description = "External reference of the product", required = false)
+    @Schema(name = "productRef", example = "DEFERRED_BILLING", description = "External reference of the product")
     public ProductRefEnum getProductRef() {
         return productRef;
     }
@@ -110,7 +110,7 @@ public class ContractRequest {
      * @return signedAt
      */
     @Valid
-    @Schema(name = "signedAt", example = "Fri Apr 22 02:00:00 CEST 2022", description = "Signed date of contract (use ISO 8601 format YYYY-MM-DD)", required = false)
+    @Schema(name = "signedAt", example = "Fri Apr 22 02:00:00 CEST 2022", description = "Signed date of contract (use ISO 8601 format YYYY-MM-DD)")
     public LocalDate getSignedAt() {
         return signedAt;
     }
@@ -234,7 +234,7 @@ public class ContractRequest {
      * @return custom
      */
     @Valid
-    @Schema(name = "custom", required = false)
+    @Schema(name = "custom")
     public DeferredBilling getCustom() {
         return custom;
     }
@@ -271,20 +271,19 @@ public class ContractRequest {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class ContractRequest {\n");
-        sb.append("    productRef: ").append(toIndentedString(productRef)).append("\n");
-        sb.append("    contractType: ").append(toIndentedString(contractType)).append("\n");
-        sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-        sb.append("    signedAt: ").append(toIndentedString(signedAt)).append("\n");
-        sb.append("    activatedAt: ").append(toIndentedString(activatedAt)).append("\n");
-        sb.append("    expireAt: ").append(toIndentedString(expireAt)).append("\n");
-        sb.append("    status: ").append(toIndentedString(status)).append("\n");
-        sb.append("    distributor: ").append(toIndentedString(distributor)).append("\n");
-        sb.append("    subscriber: ").append(toIndentedString(subscriber)).append("\n");
-        sb.append("    custom: ").append(toIndentedString(custom)).append("\n");
-        sb.append("}");
-        return sb.toString();
+        String sb = "class ContractRequest {\n" +
+                "    productRef: " + toIndentedString(productRef) + "\n" +
+                "    contractType: " + toIndentedString(contractType) + "\n" +
+                "    createdAt: " + toIndentedString(createdAt) + "\n" +
+                "    signedAt: " + toIndentedString(signedAt) + "\n" +
+                "    activatedAt: " + toIndentedString(activatedAt) + "\n" +
+                "    expireAt: " + toIndentedString(expireAt) + "\n" +
+                "    status: " + toIndentedString(status) + "\n" +
+                "    distributor: " + toIndentedString(distributor) + "\n" +
+                "    subscriber: " + toIndentedString(subscriber) + "\n" +
+                "    custom: " + toIndentedString(custom) + "\n" +
+                "}";
+        return sb;
     }
 
     /**

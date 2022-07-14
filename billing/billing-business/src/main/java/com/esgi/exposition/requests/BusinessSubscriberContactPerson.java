@@ -1,4 +1,4 @@
-package com.esgi.exposition;
+package com.esgi.exposition.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

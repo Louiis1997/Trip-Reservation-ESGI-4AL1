@@ -1,7 +1,7 @@
 package com.esgi;
 
 import com.esgi.api.ContractsApiDelegate;
-import com.esgi.messages.SubscribeContractEvent;
+import com.esgi.messages.CreateContractEvent;
 import com.esgi.model.ContractRequest;
 import com.esgi.model.ContractResponse;
 import com.esgi.queuing.KafkaContractProducerConfig;
@@ -21,7 +21,7 @@ public class ContractController implements ContractsApiDelegate {
 
     @Override
     public ResponseEntity<ContractResponse> postContract(ContractRequest contractRequest) {
-        SubscribeContractEvent event = new SubscribeContractEvent(
+        CreateContractEvent event = new CreateContractEvent(
                 contractRequest.getProductRef(),
                 contractRequest.getContractType(),
                 contractRequest.getCreatedAt(),

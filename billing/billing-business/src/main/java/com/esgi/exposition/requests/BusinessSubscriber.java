@@ -1,4 +1,4 @@
-package com.esgi.exposition;
+package com.esgi.exposition.requests;
 
 import com.esgi.model.BusinessAddress;
 import com.esgi.model.BusinessProfessionnalParty;

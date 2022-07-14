@@ -1,4 +1,4 @@
-package com.esgi.exposition;
+package com.esgi.exposition.requests;
 
 import com.esgi.model.BusinessPayment;
 import com.fasterxml.jackson.annotation.JsonProperty;

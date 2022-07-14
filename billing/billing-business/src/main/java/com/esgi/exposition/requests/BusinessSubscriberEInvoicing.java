@@ -1,4 +1,4 @@
-package com.esgi.exposition;
+package com.esgi.exposition.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -11,10 +11,10 @@ import java.util.Objects;
  * Necessary for e-Invoicing &amp; e-Reporting
  */
 
-@Schema(name = "BusinessDistributor_eFacturation", description = "Necessary for e-Invoicing & e-Reporting")
-@JsonTypeName("BusinessDistributor_eFacturation")
+@Schema(name = "BusinessSubscriber_eInvoicing", description = "Necessary for e-Invoicing & e-Reporting")
+@JsonTypeName("BusinessSubscriber_eInvoicing")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-13T15:25:34.747681+02:00[Europe/Paris]")
-public class BusinessDistributorEFacturation {
+public class BusinessSubscriberEInvoicing {
 
     @JsonProperty("siren")
     private String siren;
@@ -25,7 +25,7 @@ public class BusinessDistributorEFacturation {
     @JsonProperty("country")
     private String country;
 
-    public BusinessDistributorEFacturation siren(String siren) {
+    public BusinessSubscriberEInvoicing siren(String siren) {
         this.siren = siren;
         return this;
     }
@@ -36,7 +36,7 @@ public class BusinessDistributorEFacturation {
      * @return siren
      */
 
-    @Schema(name = "siren", example = "356000000", required = false)
+    @Schema(name = "siren", example = "784671695", required = false)
     public String getSiren() {
         return siren;
     }
@@ -45,7 +45,7 @@ public class BusinessDistributorEFacturation {
         this.siren = siren;
     }
 
-    public BusinessDistributorEFacturation tvaIntracommunautaire(String tvaIntracommunautaire) {
+    public BusinessSubscriberEInvoicing tvaIntracommunautaire(String tvaIntracommunautaire) {
         this.tvaIntracommunautaire = tvaIntracommunautaire;
         return this;
     }
@@ -56,7 +56,7 @@ public class BusinessDistributorEFacturation {
      * @return tvaIntracommunautaire
      */
 
-    @Schema(name = "tvaIntracommunautaire", example = "FR39356000000", required = false)
+    @Schema(name = "tvaIntracommunautaire", example = "FR53157896342", required = false)
     public String getTvaIntracommunautaire() {
         return tvaIntracommunautaire;
     }
@@ -65,7 +65,7 @@ public class BusinessDistributorEFacturation {
         this.tvaIntracommunautaire = tvaIntracommunautaire;
     }
 
-    public BusinessDistributorEFacturation country(String country) {
+    public BusinessSubscriberEInvoicing country(String country) {
         this.country = country;
         return this;
     }
@@ -93,10 +93,10 @@ public class BusinessDistributorEFacturation {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        BusinessDistributorEFacturation businessDistributorEFacturation = (BusinessDistributorEFacturation) o;
-        return Objects.equals(this.siren, businessDistributorEFacturation.siren) &&
-                Objects.equals(this.tvaIntracommunautaire, businessDistributorEFacturation.tvaIntracommunautaire) &&
-                Objects.equals(this.country, businessDistributorEFacturation.country);
+        BusinessSubscriberEInvoicing businessSubscriberEInvoicing = (BusinessSubscriberEInvoicing) o;
+        return Objects.equals(this.siren, businessSubscriberEInvoicing.siren) &&
+                Objects.equals(this.tvaIntracommunautaire, businessSubscriberEInvoicing.tvaIntracommunautaire) &&
+                Objects.equals(this.country, businessSubscriberEInvoicing.country);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class BusinessDistributorEFacturation {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class BusinessDistributorEFacturation {\n");
+        sb.append("class BusinessSubscriberEInvoicing {\n");
         sb.append("    siren: ").append(toIndentedString(siren)).append("\n");
         sb.append("    tvaIntracommunautaire: ").append(toIndentedString(tvaIntracommunautaire)).append("\n");
         sb.append("    country: ").append(toIndentedString(country)).append("\n");

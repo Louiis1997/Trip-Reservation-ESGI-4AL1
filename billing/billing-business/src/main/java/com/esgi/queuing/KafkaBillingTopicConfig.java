@@ -11,6 +11,7 @@ public class KafkaBillingTopicConfig {
 
     @Bean
     public NewTopic BillingSubscribeTopic() {
-        return TopicBuilder.name(BillingConstants.BILLING_SUBSCRIBE_CONTRACT_TOPIC_NAME).partitions(1).build();
+        return TopicBuilder.name(BillingConstants.CREATE_CONTRACT_TOPIC_NAME).partitions(1).build();
     }
+
 }

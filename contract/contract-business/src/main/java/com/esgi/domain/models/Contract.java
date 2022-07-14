@@ -1,15 +1,15 @@
 package com.esgi.domain.models;
 
-import com.esgi.model.BusinessContract;
+import com.esgi.model.ContractRequest;
 
 import java.time.LocalDate;
 
 public class Contract {
     private final Integer contractId;
     private final LocalDate createdAt;
-    private final BusinessContract.StatusEnum status;
+    private final ContractRequest.StatusEnum status;
 
-    public Contract(Integer contractId, LocalDate createdAt, BusinessContract.StatusEnum status) {
+    public Contract(Integer contractId, LocalDate createdAt, ContractRequest.StatusEnum status) {
         this.contractId = contractId;
         this.createdAt = createdAt;
         this.status = status;

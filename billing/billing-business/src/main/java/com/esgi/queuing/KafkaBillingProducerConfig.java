@@ -1,11 +1,16 @@
 package com.esgi.queuing;
 
-import com.esgi.BillingConstants;
+import com.esgi.application.contract.CreateContractCommandHandler;
+import com.esgi.domain.repositories.ContractRepository;
+import com.esgi.domain.repositories.SubscriberRepository;
+import com.esgi.infrastructure.repositories.contract.InMemoryContractRepository;
+import com.esgi.infrastructure.repositories.subscriber.InMemorySubscriberRepository;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -42,8 +47,18 @@ public class KafkaBillingProducerConfig {
         return kafkaTemplate;
     }
 
-    public void sendMessage(String message) {
-        LOGGER.info(String.format("Message sent (Topic : %s) -> %s", BillingConstants.BILLING_SUBSCRIBE_CONTRACT_TOPIC_NAME, message));
-        this.kafkaTemplate().send(BillingConstants.CONTRACT_TOPIC_NAME, message);
+    @Bean
+    ContractRepository contractRepositories() {
+        return new InMemoryContractRepository();
+    }
+
+    @Bean
+    SubscriberRepository subscriberRepository() {
+        return new InMemorySubscriberRepository();
+    }
+
+    @Bean
+    public CreateContractCommandHandler createContractCommandHandler() {
+        return new CreateContractCommandHandler(contractRepositories(), subscriberRepository(), kafkaTemplate());
     }
 }
