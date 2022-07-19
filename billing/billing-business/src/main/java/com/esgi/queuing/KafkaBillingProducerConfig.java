@@ -2,6 +2,7 @@ package com.esgi.queuing;
 
 import com.esgi.application.billing.GenerateMonthlyBillsCommandHandler;
 import com.esgi.application.contract.CreateContractCommandHandler;
+import com.esgi.application.contract.UpdateContractStatusCommandHandler;
 import com.esgi.domain.repositories.BillRepository;
 import com.esgi.domain.repositories.ContractRepository;
 import com.esgi.domain.repositories.SubscriberRepository;
@@ -11,6 +12,8 @@ import com.esgi.infrastructure.repositories.subscriber.InMemorySubscriberReposit
 import com.esgi.infrastructure.scheduler.GenerateInvoiceScheduler;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +28,8 @@ import java.util.Map;
 @Configuration
 @EnableScheduling
 public class KafkaBillingProducerConfig {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaBillingProducerConfig.class);
 
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String bootstrapServers;
@@ -50,6 +55,11 @@ public class KafkaBillingProducerConfig {
         return kafkaTemplate;
     }
 
+    public void send(String topic, String message) {
+        this.kafkaTemplate().send(topic, message);
+        LOGGER.info(String.format("Message sent (Topic : %s) -> %s", topic, message));
+    }
+
     @Bean
     ContractRepository contractRepositories() {
         return new InMemoryContractRepository();
@@ -72,6 +82,11 @@ public class KafkaBillingProducerConfig {
     @Bean
     public GenerateMonthlyBillsCommandHandler generateMonthlyBillsCommandHandler() {
         return new GenerateMonthlyBillsCommandHandler(kafkaTemplate(), billRepository(), subscriberRepository());
+    }
+
+    @Bean
+    public UpdateContractStatusCommandHandler updateContractStatusCommandHandler() {
+        return new UpdateContractStatusCommandHandler(kafkaTemplate(), contractRepositories());
     }
 
     @Bean

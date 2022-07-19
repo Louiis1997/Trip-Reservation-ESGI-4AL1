@@ -10,13 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-@Service
-public class KafkaBillingConsumersConfig {
+import java.util.Objects;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaBillingConsumersConfig.class);
+@Service
+public class UpdateContractStatusConsumerConfig {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateContractStatusConsumerConfig.class);
     private final CreateContractCommandHandler createContractCommandHandler;
 
-    public KafkaBillingConsumersConfig(CreateContractCommandHandler createContractCommandHandler) {
+    public UpdateContractStatusConsumerConfig(CreateContractCommandHandler createContractCommandHandler) {
         this.createContractCommandHandler = createContractCommandHandler;
     }
 
@@ -27,11 +29,12 @@ public class KafkaBillingConsumersConfig {
             CreateContractEvent createContractEvent = CreateContractEvent.fromJSON(message);
             LOGGER.info(String.format("Message received (Topic : %s) -> %s", BillingConstants.CREATE_CONTRACT_TOPIC_NAME, createContractEvent.toJSON()));
 
-            CreateContract command = new CreateContract(createContractEvent.getSubscriber(), createContractEvent.createdAt, createContractEvent.expireAt);
+            CreateContract command = new CreateContract(createContractEvent.getSubscriber(), String.valueOf(Objects.requireNonNull(createContractEvent.createdAt).hashCode()), createContractEvent.createdAt, createContractEvent.expireAt);
             createContractCommandHandler.handle(command);
         } catch (JsonProcessingException e) {
             LOGGER.error(String.format("Error while parsing message (Topic : %s) -> %s", BillingConstants.CREATE_CONTRACT_TOPIC_NAME, message));
             e.printStackTrace();
         }
     }
+
 }

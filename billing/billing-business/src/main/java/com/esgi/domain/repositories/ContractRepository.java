@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface ContractRepository {
     List<Contract> findAll();
 
-    Optional<Contract> findById(Integer id);
+    Optional<Contract> findByRef(String ref);
 
     Contract createContract(Contract contract);
 

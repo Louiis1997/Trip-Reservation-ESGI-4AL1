@@ -1,7 +1,5 @@
-package com.esgi.application.contract;
+package com.esgi.messages;
 
-import com.esgi.exposition.requests.BusinessSubscriber;
-import com.esgi.kernel.command.Command;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,19 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import java.time.LocalDate;
+public class UpdateContractStatusEvent {
+    private final String action;
+    private final String contractRef;
 
-public class CreateContract implements Command {
-    public final BusinessSubscriber subscriber;
-    public final String contractRef;
-    public final LocalDate createdAt;
-    public final LocalDate expireAt;
-
-    public CreateContract(BusinessSubscriber subscriber, String contractRef, LocalDate createdAt, LocalDate expireAt) {
-        this.subscriber = subscriber;
+    public UpdateContractStatusEvent(String action, String contractRef) {
+        this.action = action;
         this.contractRef = contractRef;
-        this.createdAt = createdAt;
-        this.expireAt = expireAt;
     }
 
     public String toJSON() throws JsonProcessingException {

@@ -1,6 +1,5 @@
 package com.esgi.queuing;
 
-import com.esgi.ContractConstants;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
@@ -18,6 +17,7 @@ import java.util.Map;
 public class KafkaContractProducerConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaContractProducerConfig.class);
+
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String bootstrapServers;
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -42,8 +42,8 @@ public class KafkaContractProducerConfig {
         return kafkaTemplate;
     }
 
-    public void sendSubscribeContractMessage(String message) {
-        this.kafkaTemplate().send(ContractConstants.CREATED_CONTRACT_TOPIC_NAME, message);
-        LOGGER.info(String.format("Message sent (Topic : %s) -> %s", ContractConstants.CREATED_CONTRACT_TOPIC_NAME, message));
+    public void send(String topic, String message) {
+        this.kafkaTemplate().send(topic, message);
+        LOGGER.info(String.format("Message sent (Topic : %s) -> %s", topic, message));
     }
 }

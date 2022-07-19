@@ -29,10 +29,13 @@ public class CreateContractCommandHandler implements CommandHandler<CreateContra
     @Override
     public Contract handle(CreateContract command) {
         try {
+            var contractId = Integer.parseInt(contractRepository.nextId());
             var contract = contractRepository.createContract(new Contract(
-                    Integer.parseInt(contractRepository.nextId()),
+                    contractId,
+                    command.contractRef,
                     LocalDate.now(),
-                    BusinessContract.StatusEnum.CREATED
+                    BusinessContract.StatusEnum.CREATED,
+                    new Subscriber(Integer.parseInt(command.contractRef), command.subscriber.getSubscriberType(), contractId, command.subscriber.getContactPerson().getMail())
             ));
 
             var subscriber = subscriberRepository.createSubscriber(new Subscriber(

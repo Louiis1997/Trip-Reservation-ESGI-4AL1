@@ -22,8 +22,10 @@ public class InMemoryContractRepository implements ContractRepository {
     }
 
     @Override
-    public Optional<Contract> findById(Integer id) {
-        return Optional.ofNullable(data.get(id));
+    public Optional<Contract> findByRef(String ref) {
+        return data.values().stream()
+                .filter(contract -> contract.getRef().equals(ref))
+                .findFirst();
     }
 
     @Override
